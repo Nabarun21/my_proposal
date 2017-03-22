@@ -1,0 +1,204 @@
+\documentclass[a4paper,11pt]{article}
+\pdfoutput=1 % if your are submitting a pdflatex (i.e. if you have
+             % images in pdf, png or jpg format)
+
+\usepackage{jinstpub} % for details on the use of the package, please
+                     % see the JINST-author-manual
+\usepackage{lineno}
+\usepackage{epstopdf}
+
+\title{\boldmath The CMS Level-1 Electron and Photon Trigger: For Run II of LHC}
+\proceeding{Oral Candidacy Exam proposal:\\
+  Dated 19th of March, 2017\\
+  }
+
+
+%% %simple case: 2 authors, same institution
+%% \author{A. Uthor}
+%% \author{and A. Nother Author}
+%% \affiliation{Institution,\\Address, Country}
+
+% more complex case: 4 authors, 3 institutions, 2 footnotes
+\author[a]{Nabarun Dev}
+
+% The "\note" macro will give a warning: "Ignoring empty anchor..."
+% you can safely ignore it.
+
+% The "\note" macro will give a warning: "Ignoring empty anchor..."
+% you can safely ignore it.
+
+\affiliation[a]{Department of physics, University of Notre Dame, Indiana, USA}
+
+% e-mail addresses: only for the forresponding author
+\emailAdd{nabarun.dev@cern.ch, ndev@nd.edu}
+
+%\notoc
+\compress
+%\toccont
+\abstract{The Compact Muon Solenoid (CMS) employs a sophisticated two-level online triggering system that has a rejection factor of up to 10$^\text{5}$. Since the beginning of Run II of LHC, the conditions that CMS operates in have become increasingly challenging. The centre-of-mass energy is now 13 TeV and the instantaneous luminosity currently peaks at $1.5 \times10^{34} \mathrm{cm^{-2}s^{-1}}$. In order to keep low physics thresholds and trigger efficiently in such conditions, the CMS trigger system has been upgraded. A new trigger architecture, the Time Multiplexed Trigger (TMT) has been introduced which allows the full granularity of the calorimeters to be exploited at the first level of the online trigger. The new trigger has also benefited immensely from technological improvements in hardware. Sophisticated algorithms, developed to fully exploit the advantages provided by the new hardware architecture, have been implemented. The new trigger system started taking physics data in 2016 following a commissioning period in 2015, and since then has performed extremely well. The hardware and firmware developments, electron and photon algorithms together with their performance in challenging 2016 conditions is presented. }
+
+
+
+
+
+
+\begin{document}
+%\setpagewiselinenumbers
+\linenumbers
+
+\maketitle
+\flushbottom
+
+\section{Introduction}
+\label{sec:intro}
+\subsection{The CMS trigger system and electromagnetic calorimeter}
+\label{subsec:cmstriggerecal}
+%For internal references use label-refs: see section~\ref{sec:intro}.
+The Compact Muon Solenoid (CMS)~\cite{a} is a large general purpose particle physics  detector  designed to study proton-proton and heavy ion collisions produced by the Large Hadron Collider (LHC), primarily to search for new particles and better understand a wide range of physics processes. A small fraction of events can be recorded offline amongst the millions produced per second at the LHC.  The trigger system is used to select these events of interest, making its efficient functioning crucial for physics searches~\cite{b}. The CMS employs a sophisticated two-level trigger system, organized in two consecutive stages- the Level-1 (L1) trigger and the High Level Trigger (HLT). The L1 trigger is implemented using custom hardware and makes decisions based on coarse information from the calorimeters and the muon systems, reducing the rate from 40 MHz to 100 kHz. It has a latency of ~3.8$\mu$s. The software-based HLT partially reconstructs the event, implementing complex selection algorithms on finer granularity information from all sub-detectors in regions deemed interesting by the L1 decision. It runs on a massive computer farm and brings down the rate further to less than 1.5 kHz.
+
+The CMS electromagnetic calorimeter (ECAL) is a hermetic state-of-the-art system designed for reconstruction of electron and photons. It is made of 75848 scintillating lead tungstate (PbWO$_4$) crystals and consists of a segmented barrel section (EB) and two endcaps (EE). It also contains a preshower for extra spatial precision. It is radiation hard and is equipped with fast electronics. In the EB, base blocks of 5$\times$5 crystals (in azimuthal ($\phi$) and pseudorapidity ($\eta$) directions) are combined to form trigger towers (TT). A more complicated geometrical arrangement helps mimic a similar layout in the EE. In the EB, the transverse energy detected by the crystals in a single TT is summed into a trigger primitive (TP) by the front-end electronics and sent to off-detector trigger concentrator cards (TCC) via optical fibers. In the EE, trigger primitive computation is completed in the TCCs. These TPs form the base blocks of the L1 e/$\gamma$ algorithms.
+
+\subsection{Run II of LHC and hardware improvements at Level-1} 
+\subsubsection{Challenging conditions of LHC Run II}
+Since the start of Run II, the LHC has successfully delivered data at increasingly higher luminosities up to $1.5 \times 10^{34} \mathrm{cm^{-2}s^{-1}}$ and at an increased center of mass energy of 13 TeV. The bunch crossing (BX) window has been reduced to 25 ns (50 ns in Run I) and pileup (number of interactions per bunch crossing) has increased up to an maximum average value of 50. This meant a very large increase in event rates. For example, Single $e/\gamma$ (18 GeV) and Double $e/\gamma$ (13 and 7 GeV) would give a rate of 40 kHz and 50 kHz respectively in Run II without the upgrade, compared to 6 kHz and 5 kHz respectively in Run I~\cite{c}. In order to maintain low physics thresholds and high signal efficiency  while maintaining the L1 rate below 100 kHz, the L1 trigger system required a significant upgrade, enhancing  the rejection power of selection algorithms along with better physics object identification and  pileup mitigation.
+
+This led to the introduction of the novel concept of Time Multiplexed Trigger (TMT). All of the data from a single event is passed down by 18 preprocessors to 9 main processors~\cite{d} (see section~\ref{subsubsec:hardware}). This allows the L1 trigger to use information down to the granularity of trigger towers. Figure~\ref{fig:j} shows the upgraded trigger architecture.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.75\textwidth]{Upgradedtriggerarchitecture.pdf}
+\qquad
+% "\includegraphics" from the "graphicx" permits to crop (trim+clip)
+% and rotate (angle) and image (and much more)
+\caption{\label{fig:j} The upgraded trigger architecture. The layers of the calorimeter trigger are seen on the left. The different layers of the muon trigger system are shown on the right. The global trigger combines information from both systems to form the Level-1 decision.  }
+\end{figure}
+\subsubsection{Upgraded trigger architecture}
+\label{subsubsec:hardware}
+The L1 trigger upgrade has benefitted immensely from recent technological developments. New optical link boards for the ECAL and HCAL with speeds ranging from 4.8 Gb/s to 6.4 Gb/s have replaced the existing copper cables (1.2 Gb/s). The TMT architecture is based on recent $\mu$TCA electronics standard and is comprised of two processing layers formed by custom made Advanced Mezzanine Cards equipped with powerful Xilinx Virtex-7 FPGAs. The layer-1, designed for data formatting and preprocessing, is comprised of 18 CTP7 (Calorimeter Trigger Processor) cards that receive data from different sections of the ECAL, HCAL  (hadronic calorimeter) and HF (hadronic forward calorimeter). The layer-2 is the main processing layer and is comprised of 9 MP7 (Master Processor) cards as shown on Figure~\ref{fig:b}. These cards hold the algorithms and have access to the entire calorimeter information (sent from all layer-1 cards) on single FPGAs. 
+\begin{figure}[htbp]
+\centering % \begin{center}/\end{center} takes some additional vertical space
+\includegraphics[width=.46\textwidth,height=.35\textwidth]{mp7.pdf}
+\qquad
+\includegraphics[width=.47\textwidth,height=.35\textwidth]{Layer_2.jpeg}
+% "\includegraphics" from the "graphicx" permits to crop (trim+clip)
+% and rotate (angle) and image (and much more)
+\caption{\label{fig:b}A  MP7 card (left), the main processing unit of Level-1 calorimeter trigger and a photo of the layer-2 crate that houses the MP7 cards (right) .}
+\end{figure}
+
+All data for a given BX is sent by the 18 layer-1 cards to a layer-2 card. Data from subsequent BXs are sent to different layer-2 cards. This proceeds until the first card has finished processing and is ready to receive data again. The data thus processed by layer-2 cards is sent  to the global trigger which takes the final L1 decision after combining the calorimeter data with information from the muon systems. 
+
+
+\section{Improved electron and photon trigger algorithm}
+The primary aim of the L1 algorithms is to reach a performance level comparable to offline reconstruction algorithms, or to get as close as possible.  Since the L1 trigger is a synchronous electronic system, all algorithms implemented in the firmware must have fixed latency. Offline reconstruction algorithms, on the other hand, are typically iterative. The upgraded L1 trigger employs newly-developed sophisticated algorithms for reconstructing electrons and photons. No tracker information is available at Level-1 making electrons and photons indistinguishable at this stage. By thoroughly exploiting the advantages offered by the new hardware architecture, as described below, these algorithms have provided several improvements with respect to previous electron and photon reconstruction~\cite{g}. These include better position and energy reconstruction, better identification of e/$\gamma$ candidates, more precise isolation criteria and a reduction in triggering rate. 
+
+\subsection{Description of the new e/$\gamma$ algorithms} 
+\label{subsec:algodescription}    
+An improved energy containment and energy reconstruction is achieved via dynamic clustering. This technique replaces previous sliding window techniques and is the first time dynamic clustering has been introduced in the Level-1 firmware. The local energy maximum above a fixed threshold, as shown in red in Figure~\ref{fig:k}, is designated as the seed tower. Clusters of towers are then built from a seed tower with the first and second neighbors dynamically clustered together with the seed. An extended region in the $\phi$-direction (up to 5 TTs)  helps recover energy lost due to bremsstrahlung. This is particularly important in the case of showering electrons and converted photons. However, only a narrow region (at most 2 TTs) is allowed in the $\eta$-direction because electromagnetic showers are compact and generally do not spread over more than 2 TTs in $\eta$. The maximum size of clusters is  limited to 8 TTs in order to minimize the impact of pileup energy deposits. The sum of the transverse energy recorded in the ECAL of all the towers in the cluster is the raw cluster E$_\text{T}$. 
+
+The position reconstruction of e/$\gamma$ candidates has been also improved by exploiting the tower level granularity. Starting from the center of the seed tower, the position of the cluster is refined within the seed, using the distribution of the energy in the cluster to construct an energy-weighted average. These new algorithms also take advantage of many cluster shapes produced by dynamic clustering that depend on the energy distribution around the seed tower as displayed in Figure~\ref{fig:k} (right). Some large cluster shapes are very unlikely to be associated with electrons/photons and likely come from jets. Electron/photon clusters are typically smaller, containing at most four TTs. This provides discriminating power for e/$\gamma$ identification. In addition to the cluster shapes, the energy distribution within the crystals of a seed tower (fine grain veto bit) and ratio of energy deposited in ECAL and HCAL seed towers are also used to obtain better identification of electrons and photons.
+
+
+\subsection{Energy calibration and isolation criteria for e/$\gamma$ candidates}  
+
+Two layers of calibrations are applied at Level-1. The first set of calibrations is applied at layer-1. They are applied at the trigger tower level and are hence common for all downstream objects.  To derive them for the ECAL, a single $\pi^{0}$ Monte-Carlo (MC) dataset without pileup was used. The corrections were obtained by comparing the generator level value of the pion energy deposit to the TP, and they depend on $\eta$ and the transverse energy of the TP. These calculations were later repeated on Run II 13 TeV data. Corrections for HCAL were derived in a similar way using a single charged pion MC without pileup. A second layer of calibrations are applied at layer-2 at the e/$\gamma$ object level. They are applied on the raw E$_\text{T}$ of a e/$\gamma$ cluster (see section~\ref{subsec:algodescription}) in order to be similar to the E$_\text{T}$  of the e/$\gamma$ candidates reconstructed offline. These corrections have been obtained by comparing the E$_\text{T}$ of the Level-1 e/$\gamma$ clusters to the E$_\text{T}$ of corresponding fully reconstructed offline electron candidates in Run II 13 TeV data, using $Z\rightarrow ee$ events with tag-and-probe selection. They depend on the $\eta$-position of the seed tower, the shape of the cluster and the uncalibrated energy of the cluster, and are encoded in a Look-Up-Table (LUT). These corrections provide a uniform energy response throughout the detector and improve the energy resolution.
+
+A more precise isolation criteria has also been implemented exploiting the full detector view that is now available at layer-2. The isolation region, as seen on Figure~\ref{fig:k} (left), is defined as 6$\times$9 TT area excluding the e/$\gamma$ footprint in ECAL (2$\times$5 TT region) and HCAL (1$\times$2 TT region). A candidate is considered isolated if it has deposited energy in the isolation region that is less than a threshold that depends on pileup, $\eta$ and raw E$_\text{T}$ of the candidate. The level of pileup is estimated, on an event-by-event basis, using the number of TTs in the central region (8 central $\eta$ rings) of the calorimeter with an energy deposit greater than or equal to 500 MeV. These thresholds were obtained from Run II 13 TeV data, using $Z\rightarrow ee$ events with a tag-and-probe selection. They were calculated such that the efficiency of the isolation criterion is constant as a function of pileup and $\eta$, but at the same time increasing with E$_\text{T}$ to ensure a 100\% efficiency for high ET candidates. The isolation thresholds are flexible and have been retuned as the luminosity of the LHC increased in order to keep the e/$\gamma$ thresholds low. It is also possible to have several LUTs containing isolation thresholds for different luminosity ranges. 
+
+
+
+\begin{figure}[htbp]
+\centering % \begin{center}/\end{center} takes some additional vertical space
+\includegraphics[width=.47\textwidth, ]{isolation.pdf}
+\qquad
+\includegraphics[width=.47\textwidth, ]{clusters.png}
+% "\includegraphics" from the "graphicx" permits to crop (trim+clip)
+% and rotate (angle) and image (and much more)
+\caption{\label{fig:k} Left: Illustration of dynamic clustering of TTs and e/$\gamma$ isolation region (blue) with the exclusion of footprints in ECAL and HCAL. Right: Various cluster shapes from dynamic clustering. Smaller e/$\gamma$-like clusters are shown on top and larger jet like clusters are shown below.}
+\end{figure}
+
+These algorithms were developed using Run I data and simulated Run II data. Their performance was then validated using data taken in 2015 during the commissioning period of the new trigger system, and they exhibit much superior performance compared to the Run I trigger. The position resolution is better by  a factor of 4 and the energy resolution has improved by up to 30\% with respect to Run I~\cite{h}. In particular, the energy resolution in the EE is now improved and closer to that in the EB. This is due to dynamic clustering being very well adapted to the complex geometry of EE. Further, the efficiency is also better with sharper turn-on curves accompanied by a reduction in rate.
+
+\subsection{Firmware implementation}
+The algorithms are implemented in the firmware using the VHDL  hardware description language. The  firmware for the electron finder along with the tau lepton and jet finders must fit within a single Xilinx FPGA, which makes its implementation a challenge. In addition, the core firmware, which comprises all necessary logic to control the I/O optical serial links, the configuration registers, the input pattern buffers, output spy buffers are also included. As seen in Figure~\ref{fig:floorplan}, a precise floor planning scheme was developed to efficiently perform a place and route process, and to guarantee that timing constraints are satisfied after modification of  VHDL sources during the development process. An internal processing speed of 240 MHz has been achieved with this approach. About 65\% of the logic resources of the chip are being used, which include the electron/photon, jet, tau lepton and missing E$_\text{T}$ triggers. The software interface is based on the IPBUS standard using libraries such as $\mu$HAL developed at CERN~\cite{e}.
+\begin{figure}[!htbp]
+\begin{center}
+\begin{minipage}[t]{7cm}
+\begin{center}
+\vspace{0cm}
+\includegraphics[angle=90,width=6.8 cm, trim=3cm 0cm 0cm 0cm]{Layer2Firmware.png}
+\end{center}
+\end{minipage}
+\hspace{1cm}
+\begin{minipage}[t]{6cm}
+\begin{center}
+\caption{ \label{fig:floorplan}Floor planning of Xilinx Virtex 7 FPGA within the MP7 board. The purple areas represent the input-output logic within the core firmware and the yellow represents the resources used by the algorithms. The red corresponds to the DAQ interface and the green the IPBus that handles the communications. }
+\end{center}
+\end{minipage}
+\end{center}
+\end{figure}
+The TMT architecture allows for data coming from calorimeters to be rearranged in geometrical order~\cite{f}. Algorithms are fully pipelined (spatially) and process data at the incoming rate starting on the reception of the first data word. The TTs are combined to form basic blocks of 3$\times$1 TTs (see section~\ref{subsec:cmstriggerecal}) upon reception. These are further combined to form bigger blocks which are the input components of algorithms. Potential cluster seeds are identified depending on the TT energy threshold. Quality flags are also set for each incoming TT based on several predefined selection criteria and help in reducing the number of resources required for the implementation of lepton cluster logic. The fully pipelined firmware approach provides an efficient way to localize the processing, reduce the size and number of fan-outs, minimize routing delays and eliminates register duplication leading to a compact and easily maintainable firmware.
+
+ 
+\section{Performance of the upgraded e/$\gamma$ trigger in 2016}
+The new L1 trigger system was commissioned in September 2015 and has been used for physics throughout data taking in 2016, and has delivered very good performance from the start. Its performance has remained excellent with the LHC delivering data at increasingly higher luminosities with higher pileup levels. The performance of the trigger in 2016 CMS physics data taking is shown in Figures 5, 6 and 7. The position resolution of the new trigger system in 2016 is presented in Figure~\ref{fig:l}. This was computed with respect to offline electron superclusters (these are clusters produced by offline electron reconstruction algorithms) using $Z\rightarrow ee$ events in 13 TeV data recorded in 2016. These plots illustrate excellent spatial resolution provided by the new trigger.
+The energy resolution of the L1 trigger is shown in Figure~\ref{fig:m}. This was computed with respect to transverse energy of the offline electron superclusters using $Z\rightarrow ee$ events. A geometrical matching between the electron supercluster and the L1 candidate is applied. The energy resolution delivered is excellent in all $\eta$ ranges. 
+In terms of trigger efficiency, turn-on curves for 2016  $Z\rightarrow ee$ data, evaluated using tag-and-probe techniques are shown in Figure~\ref{fig:n}. The sharp turn-on curves and high trigger efficiency are due to the excellent energy resolution and the performance of the new clustering algorithms. These sharp turn-on curves allow CMS to maintain low thresholds on physics object selection. 
+
+\begin{figure}[htbp!]
+\centering % \begin{center}/\end{center} takes some additional vertical space
+\includegraphics[width=.45\textwidth]{plottopleft.png}
+\qquad
+\includegraphics[width=.45\textwidth]{plottopright.png}
+% "\includegraphics" from the "graphicx" permits to crop (trim+clip)
+% and rotate (angle) and image (and much more)
+\caption{\label{fig:l}Differences in pseudo-rapidity $\eta$ (left) and azimuthal angle $\phi$ (right) for L1 EG candidates with respect to the
+offline reconstructed electron supercluster, in the barrel (|$\eta$|<1.479, in black) and in the endcaps (|$\eta$| >1.479, in red)} 
+\end{figure}
+
+\begin{figure}[htbp!]
+\centering % \begin{center}/\end{center} takes some additional vertical space
+\includegraphics[width=.45\textwidth]{plotmiddle.png}
+\qquad
+% "\includegraphics" from the "graphicx" permits to crop (trim+clip)
+% and rotate (angle) and image (and much more)
+\caption{\label{fig:m}Relative difference in transverse energy for L1 EG candidates with respect to the offline reconstructed transverse energy, in the range 0$\leq$|$\eta$|<0.25 (black), 1$\leq$|$\eta$|<1.25 (red) and 2$\leq$|$\eta$|<2.25 (blue)}
+\end{figure}
+
+\begin{figure}[htbp!]
+\centering % \begin{center}/\end{center} takes some additional vertical space
+\includegraphics[width=.44\textwidth]{plotbottomleft.png}
+\qquad
+\includegraphics[width=.44\textwidth]{plotbottomright.png}
+% "\includegraphics" from the "graphicx" permits to crop (trim+clip)
+% and rotate (angle) and image (and much more)
+\caption{\label{fig:n}Left: L1 trigger efficiency for an e/$\gamma$ object as a function of the offline reconstructed supercluster transverse energy E$_\text{T}$ for electrons in the barrel (|$\eta$|<1.479, in black) and in the endcaps (|$\eta$|>1.479, in red), for a threshold of 24 GeV (left) with and for a threshold of 40 GeV (right) without isolation requirement.}
+\end{figure}
+
+\section{Conclusions}
+
+The upgraded calorimeter trigger has been running smoothly from the start of data taking in 2016 and has exhibited excellent performance. The isolation criteria and energy calibration are optimized at regular intervals to follow the increasing LHC luminosity which currently peaks at more than $1.5 \times 10^{34} \mathrm{cm^{-2}s^{-1}}$. The new trigger has enabled CMS to maintain low e/$\gamma$  thresholds throughout LHC Run II. The current trigger scheme for physics includes: single isolated and non-isolated e/$\gamma$  triggers for electroweak (EWK) processes; double e/$\gamma$, triple e/$\gamma$ triggers for Higgs physics. It is possible for CMS to increase its selectivity by introducing new invariant mass triggers for EWK processes. The new trigger architecture, being modular, provides the flexibility to add more processing nodes if needed. It is very important for the e/$\gamma$ trigger to be able to perform efficiently to be maximally sensitive to new physics signatures over a wide range of particle energies. The new CMS Level-1 electron and photon trigger has delivered very high performance in 2016, consistent with expectations and is expected to do so throughout challenging conditions of LHC Run II and Run III.    
+  
+\begin{thebibliography}{}
+
+\bibitem{a}CMS Collaboration, \emph{The CMS Experiment at the CERN LHC}, \emph{JINST} {\bf 3 S08004} (2008) .
+\bibitem{b}CMS Collaboration, \emph{CMS TriDAS project: Technical Design Report, vol. 1: The Trigger Systems
+}, \emph{CERN-LHCC-2000-038}, {\bf  CMS-TDR-6-1} (2000) .
+\bibitem{c}CMS Collaboration, \emph{CMS Technical Design Report for The Level-1 Trigger Upgrade}, \emph{CERN-LHCC-2013-011} {\bf CMS-TDR-12} (2008).
+\bibitem{d}A. Zabi for CMS collaboration\emph{The CMS Level-1 Calorimeter Trigger for LHC Run II}, \emph{these proceedings } {\bf TWEPP } (2016).
+\bibitem{e}T. Williams et al., \emph{IPbus:  A  flexible  Ethernet-based  control  system  for  xTCA  hardware}, \emph{JINST} {\bf 10 C02019} (2015).
+\bibitem{f}A. Zabi for CMS Collaboration, \emph{Triggering on electrons, jets and tau leptons  with the CMS upgraded calorimeter trigger for
+the LHC RUN II}, \emph{JINST} {\bf 11 C02008} (2016).
+\bibitem{g}J.B. Sauvan for CMS Collaboration \emph{Performance and upgrade of the CMS electron and photon trigger for
+Run 2}, \emph{J. Phys. Conf. Ser.} {\bf 587} (2015) 012021.
+\bibitem{h}T. Strebler for CMS Collaboration, \emph{Level-1 trigger selection of electrons and photons with CMS for LHC Run-II}, \emph{CMS CR} {\bf -2015/220} (2008) .
+ 
+
+% Please avoid comments such as "For a review'', "For some examples",
+% "and references therein" or move them in the text. In general,
+% please leave only references in the bibliography and move all
+% accessory text in footnotes.
+
+% Also, please have only one work for each \bibitem.
+
+
+\end{thebibliography}
+\end{document}
