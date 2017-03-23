@@ -7,6 +7,7 @@
                      % see the JINST-author-manual
 \usepackage{lineno}
 \usepackage{epstopdf}
+\usepackage{wrapfig}
 
 \title{\boldmath A search for Lepton Flavor Violating Decays of the Higgs Boson }
 \proceeding{Oral Candidacy Exam proposal:\\
@@ -70,24 +71,41 @@ These constraints set weak limits on LFV Higgs decays allowing significant branc
 
 \section{LHC and the CMS}
 \label{sec:lhccms} 
-The Large Hadron Collider (LHC) is a circlar particle accelerator designed to collide proton beams with a centre-of-mass energy of 14 TeV. It consists of a 27-kilometre ring of superconducting magnets with a number of accelerating structures to boost the energy of the particles along the way. Currently, (run II) the LHC operating at a COM energy of 13 TeV (compared to 7 TeV in run I) and luminosities up to $1.5 \times 10\^{34} \mathrm{cm^{-2}s^{-1}}$. Under run II conditions, the Higgs production cross-section is a factor 2 higher~\cite{f} than run I (see figure~\ref{fig:a}) and almost twice the amount of dta has already been collected.     
+The Large Hadron Collider (LHC) is a circlar particle accelerator designed to collide proton beams with a centre-of-mass energy of 14 TeV. It consists of a 27-kilometre ring of superconducting magnets with a number of accelerating structures to boost the energy of the particles along the way. Currently, (run II) the LHC operating at a COM energy of 13 TeV (compared to 7 TeV in run I) and luminosities up to $1.5 \times 10^{34} \mathrm{cm^{-2}s^{-1}}$. Under run II conditions, the Higgs production cross-section is a factor 2 higher~\cite{f} than run I (see figure~\ref{fig:a}) and almost twice the amount of dta has already been collected.     
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=.60\textwidth]{Plot_Escan_H125_new_sqrt.pdf}
+\includegraphics[width=.40\textwidth]{Plot_Escan_H125_new_sqrt.pdf}
 \qquad
 % "\includegraphics" from the "graphicx" permits to crop (trim+clip)
 % and rotate (angle) and image (and much more)
-\caption{\label{fig:j} Higg production cross-section as a function of the collison center-of-mass energy  }
+\caption{\label{fig:a} Higg production cross-section as a function of the collison center-of-mass energy  }
 \end{figure}
 
-The Compact Muon Solenoid (CMS) is a large general purpose particle physics  detector  designed to study proton-proton collisions produced by LHC. A detailed description of the CMS detector can be found here~\cite{g}. I consists of a super conducting solenoid that houses tracking and calorimetry systems and provides an axial magnetic field of 3.8T.The inner-most layer is the silicon pixel and strip tracker that measures the trajectories of charge particles and covers a range of $|\eta|<2.5$($\eta$ is the pseudorapidity defined as $-ln[tan(\frac{\theta}{2})]$, where $\theta$ is polar angle of the particle's trajectory with respect to the beam direction). Surrounding the tracker are the lead tungstate crystal electromagnetic calorimeter (ECAL) which measures the energy of electrons and photons, and the hadronic calorimeter (HCAL) which measure the energy of heavier particles that pass through the HCAL. The ECAL also contains preshower detector for extra spatial precision.Surrounding the solenoid is the muon system which has gas-ionization detectors placed in the steel yoke of the magnet. This isthe outermost component of CMS and measures the momenta of muons that traverse through it.   
-Only a small fraction of events produced by the LHC can be permanently stored, and to select these events of interest, CMS employs a sophisticated two-level trigger system, organized in two consecutive stages- the Level-1 (L1) trigger and the High Level Trigger (HLT). The L1 trigger is implemented using custom hardware and makes decisions based on coarse information from the calorimeters and the muon systems, reducing the rate from 40 MHz to 100 kHz. It has a latency of ~3.8$\mu$s. The software-based HLT partially reconstructs the event, implementing complex selection algorithms on finer granularity information from all sub-detectors in regions deemed interesting by the L1 decision. It runs on a massive computer farm and brings down the rate further to less than 1.5 kHz. I am part of a team that works on the cusp of ECAL and L-1 trigger and have helped maintain and improve the functioning of this system. This is mentioned in detail in section~\ref{sec:intro}.
+The Compact Muon Solenoid (CMS) is a large general purpose particle physics  detector  designed to study proton-proton collisions produced by LHC. 
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+    \includegraphics[width=.46\textwidth]{cms.png}
+  \caption{\label{fig:b} The CMS detector  }
+\end{wrapfigure}
+A detailed description of the CMS detector can be found here~\cite{g}.
+It consists of a superconducting solenoid that houses tracking and calorimetry systems and provides an axial magnetic field of 3.8T.The inner-most layer is the silicon pixel and strip tracker that measures the trajectories of charge particles and covers a range of $|\eta|<2.5$($\eta$ is the pseudorapidity defined as $-ln[tan(\frac{\theta}{2})]$, where $\theta$ is polar angle of the particle's trajectory with respect to the beam direction). Surrounding the tracker are the lead tungstate crystal electromagnetic calorimeter (ECAL) which measures the energy of electrons and photons, and the hadronic calorimeter (HCAL) which measure the energy of heavier particles that pass through the HCAL. The ECAL also contains preshower detector for extra spatial precision.Outside the solenoid is the muon system which has gas-ionization detectors placed in the steel yoke of the magnet. This is the outermost component of CMS and measures the momenta of muons that traverse through it.
+
+Another vital component of the CMS is its trigger system. Only a small fraction of events produced by the LHC can be permanently stored, and to select these events of interest, CMS employs a sophisticated two-level trigger , organized in consecutive stages- the Level-1 (L1) trigger and the High Level Trigger (HLT). The L1 trigger is implemented using custom hardware and makes decisions based on coarse information from the calorimeters and the muon systems, reducing the rate from 40 MHz to 100 kHz. It has a latency of ~3.8$\mu$s. The software-based HLT partially reconstructs the event, implementing complex selection algorithms on finer granularity information from all sub-detectors in regions deemed interesting by the L1 decision. It runs on a massive computer farm and brings down the rate further to less than 1.5 kHz. I am part of a team that works on the cusp of ECAL and L-1 trigger and have helped maintain and improve the functioning of this system. This is mentioned in detail in section~\ref{sec:intro}.
 
 
 \section {Overview of the Analysis}
 \subsection{LFV Signal}
+In BSM theories it is possible to introduce off-diagonal Higgs-fermion Yukawa couplings such as $Y_{\mu\tau}$ in addition to the SM $Y_{\mu\mu}$,$Y_{\tau\tau}$,$Y_{ee}$ couplings allowing the Higgs to decay into to oppositely charged leptons of different flavor.  The decay studied here $H\rightarrow \mu\tau$ with that $\tau$ decaying to an electron (and neutrinos) is of particular importance because CMS can much better identify and reconstruct an electron than a hadronically decaying tau making for a cleaner signature. It is important to note that $H\rightarrow \mu\tau_{e}$ final state bears some similarities with SM $H\rightarrow \tau_{\mu}\tau_{e}$ process albeit with significant kinematic differences.
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+    \includegraphics[width=.46\textwidth]{Plot_Escan_H125_new_sqrt.pdf}
+  \caption{\label{fig:c} Higg production cross-section as a function of the collison center-of-mass energy  }
+\end{wrapfigure}
 
+The muon in the LFV decay comes promptly from the H and has a harder $p_{T}$ spectrum compared to the SM muon. There are fewer neutrinos in the LFV decay which makes its missing transverse ($E_{T}^{miss}$) energy spectrum (neutrinos being very weakly interacting can't be detected by CMS and their transverse momenta can be estimated from $E_{T}^{miss}$). Further, the neutrinos in the LFV process come from the decay of the highly boosted tau, leading the $E_{T}^{miss}$ and electron to be highly collinear. This fact also motivates us to use collinear mass ($M_{coll}$) as an estimator of the reconstructed H mass. This is based on the collinear approximation~\cite{h}- the mass of the H being much greater than the mass of the $\tau$, all the $\tau$ decay products are boosted in the direction of the $\tau$. The neutrino momenta ($p_{T}^{\nu,~\text{est}}$) can thus be approximated to be in the same direction of the electron and can be estimated form the projection of $E_{T}^{miss}$ onto the $\tau$ direction.The collinear mass can then be derived from the visible mass of the $\tau$-$e$ system ($M_{\text{vis}}$) as $M_{\text{col}}= M_{\text{vis}} / \sqrt{x_{\tau}^\text{vis}}$, where $x_{\tau}^\text{vis}$ is the fraction of energy carried by the visible decay products of the $\tau$ ($x_{\tau}^\text{vis}={p_{T}^{\tau^{\text{vis}}}}/{(p_{T}^{\tau^\text{vis}}+p_{T}^{\nu,~\text{est}})}$).
+
+\subsection{Background processes}
 
 \begin{figure}[htbp]
 \centering % \begin{center}/\end{center} takes some additional vertical space
@@ -98,6 +116,7 @@ Only a small fraction of events produced by the LHC can be permanently stored, a
 % and rotate (angle) and image (and much more)
 \caption{\label{fig:k} Left: Illustration of dynamic clustering of TTs and e/$\gamma$ isolation region (blue) with the exclusion of footprints in ECAL and HCAL. Right: Various cluster shapes from dynamic clustering. Smaller e/$\gamma$-like clusters are shown on top and larger jet like clusters are shown below.}
 \end{figure}
+
 
 These algorithms were developed using Run I data and simulated Run II data. Their performance was then validated using data taken in 2015 during the commissioning period of the new trigger system, and they exhibit much superior performance compared to the Run I trigger. The position resolution is better by  a factor of 4 and the energy resolution has improved by up to 30\% with respect to Run I~\cite{h}. In particular, the energy resolution in the EE is now improved and closer to that in the EB. This is due to dynamic clustering being very well adapted to the complex geometry of EE. Further, the efficiency is also better with sharper turn-on curves accompanied by a reduction in rate.
 
